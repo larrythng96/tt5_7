@@ -110,3 +110,20 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+.expense {
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.expense.reminder {
+  border-left: 5px solid green;
+}
+
+.expense h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

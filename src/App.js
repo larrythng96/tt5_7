@@ -72,28 +72,6 @@ const App = () => {
       : alert('Error Deleting This Project')
   }
 
-  // // Toggle Reminder
-  // const toggleReminder = async (id) => {
-  //   const projectToToggle = await fetchProject(id)
-  //   const updProject = { ...projectToToggle, reminder: !projectToToggle.reminder }
-
-  //   const res = await fetch(`http://localhost:5000/projects/${id}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //     },
-  //     body: JSON.stringify(updProject),
-  //   })
-
-  //   const data = await res.json()
-
-  //   setProjects(
-  //     projects.map((project) =>
-  //       project.id === id ? { ...project, reminder: data.reminder } : project
-  //     )
-  //   )
-  // }
-
   return (
     <Router>
       <div className='container'>
@@ -103,7 +81,7 @@ const App = () => {
         />
         <Routes>
           <Route
-            path='/'
+            path='/projects'
             element={
               <>
                 {showAddProject && <AddProject onAdd={addProject} user_id={currentUser.id} />}

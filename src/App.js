@@ -2,108 +2,118 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Tasks from './components/Tasks'
-import AddTask from './components/AddTask'
+import Projects from './components/Projects'
+import AddProject from './components/AddProject'
 import About from './components/About'
 
 const App = () => {
-  const [showAddTask, setShowAddTask] = useState(false)
-  const [tasks, setTasks] = useState([])
+  const [showAddProject, setShowAddProject] = useState(false)
+  const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    const getTasks = async () => {
-      const tasksFromServer = await fetchTasks()
-      setTasks(tasksFromServer)
+    const getProjects = async () => {
+      const projectsFromServer = await fetchProjects()
+      setProjects(projectsFromServer)
     }
 
-    getTasks()
+    getProjects()
   }, [])
 
-  // Fetch Tasks
-  const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+  // Stub Data
+  const currentUser = {
+    "id": 1,
+    "username": "user101",
+    "password": "123456",
+    "name": "Jacky",
+    "appointment": "Project Lead"
+  }
+
+  // Fetch Projects
+  const fetchProjects = async () => {
+    const res = await fetch('http://localhost:5000/projects')
+    let data = await res.json()
+
+    data = data.filter((projects) => (projects.user_id == currentUser.id))
+
+    return data
+  }
+
+  // Fetch Project
+  const fetchProject = async (id) => {
+    const res = await fetch(`http://localhost:5000/projects/${id}`)
     const data = await res.json()
 
     return data
   }
 
-  // Fetch Task
-  const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
-    const data = await res.json()
-
-    return data
-  }
-
-  // Add Task
-  const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+  // Add Project
+  const addProject = async (project) => {
+    const res = await fetch('http://localhost:5000/projects', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(task),
+      body: JSON.stringify(project),
     })
 
     const data = await res.json()
 
-    setTasks([...tasks, data])
+    setProjects([...projects, data])
   }
 
-  // Delete Task
-  const deleteTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+  // Delete Project
+  const deleteProject = async (id) => {
+    const res = await fetch(`http://localhost:5000/projects/${id}`, {
       method: 'DELETE',
     })
     //We should control the response status to decide if we will change the state or not.
     res.status === 200
-      ? setTasks(tasks.filter((task) => task.id !== id))
-      : alert('Error Deleting This Task')
+      ? setProjects(projects.filter((project) => project.id !== id))
+      : alert('Error Deleting This Project')
   }
 
-  // Toggle Reminder
-  const toggleReminder = async (id) => {
-    const taskToToggle = await fetchTask(id)
-    const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
+  // // Toggle Reminder
+  // const toggleReminder = async (id) => {
+  //   const projectToToggle = await fetchProject(id)
+  //   const updProject = { ...projectToToggle, reminder: !projectToToggle.reminder }
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(updTask),
-    })
+  //   const res = await fetch(`http://localhost:5000/projects/${id}`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(updProject),
+  //   })
 
-    const data = await res.json()
+  //   const data = await res.json()
 
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, reminder: data.reminder } : task
-      )
-    )
-  }
+  //   setProjects(
+  //     projects.map((project) =>
+  //       project.id === id ? { ...project, reminder: data.reminder } : project
+  //     )
+  //   )
+  // }
 
   return (
     <Router>
       <div className='container'>
         <Header
-          onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
+          onAdd={() => setShowAddProject(!showAddProject)}
+          showAdd={showAddProject}
         />
         <Routes>
           <Route
             path='/'
             element={
               <>
-                {showAddTask && <AddTask onAdd={addTask} />}
-                {tasks.length > 0 ? (
-                  <Tasks
-                    tasks={tasks}
-                    onDelete={deleteTask}
-                    onToggle={toggleReminder}
+                {showAddProject && <AddProject onAdd={addProject} user_id={currentUser.id} />}
+                {projects.length > 0 ? (
+                  <Projects
+                    projects={projects}
+                    onDelete={deleteProject}
                   />
                 ) : (
-                  'No Tasks To Show'
+                  'No Projects To Show'
                 )}
               </>
             }

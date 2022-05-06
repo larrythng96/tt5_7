@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 96%;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -54,18 +54,18 @@ body {
   width: 100%;
 }
 
-.task {
+.project {
   background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
 }
 
-.task.reminder {
+.project.reminder {
   border-left: 5px solid green;
 }
 
-.task h3 {
+.project h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;

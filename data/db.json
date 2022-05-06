@@ -29,7 +29,6 @@
       "name": "Hardware"
     }
   ],
-
   "expenses": [
     {
       "id": 1,
@@ -56,7 +55,6 @@
       "updated_by": "Helen"
     }
   ],
-  
   "projects": [
     {
       "id": 1,
@@ -78,44 +76,50 @@
       "name": "ULS",
       "budget": 11000,
       "description": "Upgrade Legacy System"
+    },
+    {
+      "name": "test",
+      "budget": "100",
+      "description": "test description",
+      "user_id": 1,
+      "id": 4
     }
   ],
-
   "user": [
     {
-        "id": 1,
-        "username": "user101",
-        "password": "123456",
-        "name": "Jacky",
-        "appointment": "Project Lead"
+      "id": 1,
+      "username": "user101",
+      "password": "123456",
+      "name": "Jacky",
+      "appointment": "Project Lead"
     },
     {
-        "id": 2,
-        "username": "user102",
-        "password": "123456",
-        "name": "Jane",
-        "appointment": "Project Manager"
+      "id": 2,
+      "username": "user102",
+      "password": "123456",
+      "name": "Jane",
+      "appointment": "Project Manager"
     },
     {
-        "id": 3,
-        "username": "user103",
-        "password": "123456",
-        "name": "Tom",
-        "appointment": "Project Manager"
+      "id": 3,
+      "username": "user103",
+      "password": "123456",
+      "name": "Tom",
+      "appointment": "Project Manager"
     },
     {
-        "id": 4,
-        "username": "user104",
-        "password": "123456",
-        "name": "Helen",
-        "appointment": "Project Manager"
+      "id": 4,
+      "username": "user104",
+      "password": "123456",
+      "name": "Helen",
+      "appointment": "Project Manager"
     },
     {
-        "id": 5,
-        "username": "user105",
-        "password": "123456",
-        "name": "Mark",
-        "appointment": "Senior Project Manager"
+      "id": 5,
+      "username": "user105",
+      "password": "123456",
+      "name": "Mark",
+      "appointment": "Senior Project Manager"
     }
-]
+  ]
 }

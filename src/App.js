@@ -5,6 +5,8 @@ import Footer from './components/Footer'
 import Projects from './components/Projects'
 import AddProject from './components/AddProject'
 import About from './components/About'
+import Login from './components/Login'
+
 
 const App = () => {
   const [showAddProject, setShowAddProject] = useState(false)
@@ -119,6 +121,7 @@ const App = () => {
             }
           />
           <Route path='/about' element={<About />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
         <Footer />
       </div>
